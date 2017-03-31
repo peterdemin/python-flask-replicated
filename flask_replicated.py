@@ -21,7 +21,7 @@ class FlaskReplicated(object):
                 db = app.extensions['sqlalchemy'].db
                 get_engine_vanilla = db.get_engine
 
-                def get_replicated_engine(app, bind=None):
+                def get_replicated_engine(app=app, bind=None):
                     if bind is None:
                         use_slave = getattr(g, 'use_slave', False)
                         use_master = getattr(g, 'use_master', False)
