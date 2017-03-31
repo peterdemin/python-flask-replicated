@@ -73,7 +73,7 @@ setup(
     ),
     long_description=readme,
     author='Peter Demin',
-    author_email='poslano@gmail.com',
+    author_email='peterdemin@gmail.com',
     url='https://github.com/peterdemin/python-flask-replicated',
     license="BSD",
     zip_safe=False,
@@ -87,6 +87,6 @@ setup(
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
     ],
-    version='1.1',
+    version='1.2',
     py_modules=['flask_replicated'],
 )
