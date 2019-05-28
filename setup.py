@@ -87,6 +87,6 @@ setup(
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
     ],
-    version='1.2',
+    version='1.3',
     py_modules=['flask_replicated'],
 )
