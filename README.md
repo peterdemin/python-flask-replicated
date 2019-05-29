@@ -42,6 +42,10 @@ To handle these situations wrap appropriate view function with
 @flask_replicated.changes_database decorator.
 It will mark function to always use master database url.
 
+Conversely, wrap the view function with the @use_slave_database
+decorator if you want to ensure that it always uses
+the slave replica.
+
 ### GET after POST
 
 There is a special case that needs addressing when working with asynchronous
