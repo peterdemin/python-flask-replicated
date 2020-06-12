@@ -22,7 +22,7 @@ class FlaskReplicated(object):
                 get_engine_vanilla = db.get_engine
 
                 def get_replicated_engine(app=app, bind=None):
-                    if bind is None:
+                    if bind is None and g:
                         use_slave = getattr(g, 'use_slave', False)
                         use_master = getattr(g, 'use_master', False)
                         if use_slave and not use_master:
@@ -41,6 +41,7 @@ class FlaskReplicated(object):
 def changes_database(func):
     func.use_master_database = True
     return func
+
 
 def use_slave_database(func):
     func.use_slave_database = True
