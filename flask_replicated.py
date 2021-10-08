@@ -15,7 +15,7 @@ class FlaskReplicated(object):
         if 'replicated' not in app.extensions:
             app.extensions['replicated'] = self
             binds = app.config.get('SQLALCHEMY_BINDS') or {}
-            auto_slave = app.config.get('AUTO_READ_ON_SLAVE')
+            auto_slave = app.config.get('AUTO_READ_ON_SLAVE', True)
             if 'slave' in binds:
                 app.before_request(self._pick_database_replica, auto_slave)
                 db = app.extensions['sqlalchemy'].db
