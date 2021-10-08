@@ -34,7 +34,7 @@ class FlaskReplicated(object):
         func = current_app.view_functions.get(request.endpoint)
         if getattr(func, 'use_master_database', False):
             g.use_master = True
-        g.use_slave = (request.method in self.READONLY_METHODS or getattr(func, 'use_slave_database', False)) and auto_slave
+        g.use_slave = ( request.method in self.READONLY_METHODS and auto_slave ) or getattr(func, 'use_slave_database', False)
 
 def use_master_database(func):
     func.use_master_database = True
