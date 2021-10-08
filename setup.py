@@ -1,9 +1,7 @@
 from setuptools import setup
 
-
 with open('README.rst') as fp:
     readme = fp.read()
-
 
 setup(
     name='flask_replicated',
@@ -30,6 +28,6 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
     ],
-    version='1.4',
+    version='2.0',
     py_modules=['flask_replicated'],
 )
