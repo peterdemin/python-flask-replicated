@@ -9,7 +9,11 @@ SqlAlchemy. It's purpose it to provide more or less automatic
 master-slave replication. On each request, extension determines database
 usage intention (to read or to write into a database). Then, it picks
 right database url inside overriden ``db.get_engine()`` whenever request
-handler tries to access database.
+handler tries to access database depending on REST verb used.
+
+Flask replicated comes with a security kill-switch to enable developper mode
+to easily keep control on the feature ``AUTO_READ_ON_SLAVE`` true by default,
+once deactivated only master database will be used unless explicit use of the decorators.
 
 INSTALLATION
 ------------
@@ -18,6 +22,7 @@ INSTALLATION
 
 2. In flask ``app.config`` configure your database bindings a standard way::
 
+       AUTO_READ_ON_SLAVE = True
        SQLALCHEMY_DATABASE_URI = '%(schema)s://%(user)s:%(password)s@%(master_host)s/%(database)s'
        SQLALCHEMY_BINDS = {
            'master': SQLALCHEMY_DATABASE_URI,
@@ -35,7 +40,7 @@ USAGE
 
 Flask replicated routes SQL queries into different databases based on
 request method. If method is one of ``READONLY_METHODS`` which are defined
-as set(['GET', 'HEAD'])
+as set(['GET', 'HEAD']) and config ``AUTO_READ_ON_SLAVE`` has not been set
 
 While this is usually enough there are cases when DB access is not
 controlled explicitly by your business logic. Good examples are implicit
@@ -45,11 +50,13 @@ These things can happen at arbitrary moments of time, including during
 GET requests.
 
 To handle these situations wrap appropriate view function with
-``@flask_replicated.changes_database`` decorator. It will mark function to
+``@flask_replicated.use_master_database`` decorator. It will mark function to
 always use master database url.
 
-Conversely, wrap the view function with the ``@use_slave_database``
+Conversely, wrap the view function with the ``@flask_replicated.use_slave_database``
 decorator if you want to ensure that it always uses the slave replica.
+
+
 
 GET after POST
 ~~~~~~~~~~~~~~
