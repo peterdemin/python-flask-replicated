@@ -11,7 +11,7 @@ usage intention (to read or to write into a database). Then, it picks
 right database url inside overriden ``db.get_engine()`` whenever request
 handler tries to access database depending on REST verb used.
 
-Flask replicated comes with a security kill-switch to enable developper mode
+Flask replicated comes with a security kill-switch to enable developer mode
 to easily keep control on the feature ``AUTO_READ_ON_SLAVE`` true by default,
 once deactivated only master database will be used unless explicit use of the decorators.
 
